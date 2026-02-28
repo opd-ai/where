@@ -3,6 +3,12 @@ package rendering
 
 import "image/color"
 
+// Camera perspective constants
+const (
+	PerspectiveFirstPerson     = "first-person"
+	PerspectiveOverTheShoulder = "over-the-shoulder"
+)
+
 // Palette defines a genre-specific color palette for rendering.
 type Palette struct {
 	Genre  string
@@ -31,13 +37,17 @@ func NewRenderer(width, height int) *Renderer {
 	return &Renderer{
 		Width:       width,
 		Height:      height,
-		Perspective: "first-person",
+		Perspective: PerspectiveFirstPerson,
 	}
 }
 
 // SetPerspective sets the camera perspective.
+// Valid values are PerspectiveFirstPerson or PerspectiveOverTheShoulder.
+// Invalid values are ignored.
 func (r *Renderer) SetPerspective(perspective string) {
-	r.Perspective = perspective
+	if perspective == PerspectiveFirstPerson || perspective == PerspectiveOverTheShoulder {
+		r.Perspective = perspective
+	}
 }
 
 // Draw performs a render pass.

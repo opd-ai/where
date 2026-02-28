@@ -27,10 +27,10 @@ type Game struct {
 func (g *Game) Update() error {
 	// Toggle perspective with 'P' key
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
-		if g.cfg.Window.Perspective == "first-person" {
-			g.cfg.Window.Perspective = "over-the-shoulder"
+		if g.cfg.Window.Perspective == rendering.PerspectiveFirstPerson {
+			g.cfg.Window.Perspective = rendering.PerspectiveOverTheShoulder
 		} else {
-			g.cfg.Window.Perspective = "first-person"
+			g.cfg.Window.Perspective = rendering.PerspectiveFirstPerson
 		}
 		g.renderer.SetPerspective(g.cfg.Window.Perspective)
 	}
