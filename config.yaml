@@ -1,0 +1,27 @@
+# Where — default configuration
+
+game:
+  seed: 0
+  genre: "fantasy"
+  max_players: 12
+  map_size: 512
+
+window:
+  title: "Where"
+  width: 1280
+  height: 720
+  fullscreen: false
+  vsync: true
+
+server:
+  address: "localhost"
+  port: 7777
+  tick_rate: 60
+
+audio:
+  enabled: true
+  volume: 0.8
+
+debug:
+  enabled: false
+  show_fps: false
