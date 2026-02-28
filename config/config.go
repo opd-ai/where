@@ -7,6 +7,12 @@ import (
 	"github.com/spf13/viper"
 )
 
+// Camera perspective constants
+const (
+	PerspectiveFirstPerson     = "first-person"
+	PerspectiveOverTheShoulder = "over-the-shoulder"
+)
+
 // Config holds all application configuration.
 type Config struct {
 	Game   GameConfig   `mapstructure:"game"`
@@ -26,11 +32,12 @@ type GameConfig struct {
 
 // WindowConfig holds window/display settings.
 type WindowConfig struct {
-	Title      string `mapstructure:"title"`
-	Width      int    `mapstructure:"width"`
-	Height     int    `mapstructure:"height"`
-	Fullscreen bool   `mapstructure:"fullscreen"`
-	VSync      bool   `mapstructure:"vsync"`
+	Title       string `mapstructure:"title"`
+	Width       int    `mapstructure:"width"`
+	Height      int    `mapstructure:"height"`
+	Fullscreen  bool   `mapstructure:"fullscreen"`
+	VSync       bool   `mapstructure:"vsync"`
+	Perspective string `mapstructure:"perspective"`
 }
 
 // ServerConfig holds server settings.
@@ -71,6 +78,11 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("unmarshaling config: %w", err)
 	}
 
+	// Validate and normalize perspective value
+	if cfg.Window.Perspective != PerspectiveFirstPerson && cfg.Window.Perspective != PerspectiveOverTheShoulder {
+		cfg.Window.Perspective = PerspectiveFirstPerson
+	}
+
 	return &cfg, nil
 }
 
@@ -85,6 +97,7 @@ func setDefaults() {
 	viper.SetDefault("window.height", 720)
 	viper.SetDefault("window.fullscreen", false)
 	viper.SetDefault("window.vsync", true)
+	viper.SetDefault("window.perspective", PerspectiveFirstPerson)
 
 	viper.SetDefault("server.address", "localhost")
 	viper.SetDefault("server.port", 7777)

@@ -5,10 +5,10 @@ import "github.com/opd-ai/where/pkg/engine"
 
 // Recipe defines a crafting recipe.
 type Recipe struct {
-	Name     string
-	Inputs   []string
-	Output   string
-	Genre    string
+	Name   string
+	Inputs []string
+	Output string
+	Genre  string
 }
 
 // CraftingSystem manages crafting recipes and actions.

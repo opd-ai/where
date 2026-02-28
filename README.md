@@ -53,13 +53,19 @@ sudo apt-get install libx11-dev libxrandr-dev libxcursor-dev libxinerama-dev lib
 
 Edit `config.yaml` in the working directory. Defaults are used if the file is absent.
 
-| Section  | Fields                                  |
-|----------|-----------------------------------------|
-| game     | seed, genre, max_players, map_size      |
-| window   | title, width, height, fullscreen, vsync |
-| server   | address, port, tick_rate                |
-| audio    | enabled, volume                         |
-| debug    | enabled, show_fps                       |
+| Section  | Fields                                         |
+|----------|------------------------------------------------|
+| game     | seed, genre, max_players, map_size             |
+| window   | title, width, height, fullscreen, vsync, perspective |
+| server   | address, port, tick_rate                       |
+| audio    | enabled, volume                                |
+| debug    | enabled, show_fps                              |
+
+**Camera Perspective:** The `window.perspective` setting controls the gameplay visual perspective. Supported values:
+- `first-person` — First-person view (default)
+- `over-the-shoulder` — Over-the-shoulder (third-person) view
+
+Press **P** during gameplay to toggle between perspectives.
 
 ## Dependencies
 
