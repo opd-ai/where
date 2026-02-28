@@ -52,7 +52,7 @@ type DebugConfig struct {
 	ShowFPS bool `mapstructure:"show_fps"`
 }
 
-// Load reads configuration from file and environment, returning a Config.
+// Load reads configuration from file, returning a Config.
 func Load() (*Config, error) {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")

@@ -39,11 +39,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
-		log.Printf("config: %v, using defaults", err)
-		cfg = &config.Config{
-			Game:   config.GameConfig{Genre: "fantasy", MaxPlayers: 12, MapSize: 512},
-			Window: config.WindowConfig{Title: "Where", Width: 1280, Height: 720},
-		}
+		log.Fatalf("failed to load config: %v", err)
 	}
 
 	world := engine.NewWorld()

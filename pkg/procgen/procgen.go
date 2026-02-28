@@ -3,7 +3,6 @@ package procgen
 
 // GenerationParams holds parameters for procedural generation.
 type GenerationParams struct {
-	Seed  int64
 	Genre string
 	Size  int
 }

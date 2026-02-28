@@ -1,7 +1,11 @@
 // Package world provides biome, climate, and erosion simulation.
 package world
 
-import "github.com/opd-ai/where/pkg/procgen"
+import (
+	"fmt"
+
+	"github.com/opd-ai/where/pkg/procgen"
+)
 
 // BiomeType identifies a biome.
 type BiomeType string
@@ -34,6 +38,9 @@ type BiomeGenerator struct{}
 
 // Generate produces a world map from the given seed and params.
 func (g *BiomeGenerator) Generate(seed int64, params procgen.GenerationParams) (interface{}, error) {
+	if params.Size <= 0 {
+		return nil, fmt.Errorf("invalid map size: %d (must be > 0)", params.Size)
+	}
 	// Skeleton: biome generation logic
 	m := &Map{
 		Width:  params.Size,

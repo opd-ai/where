@@ -49,7 +49,7 @@ func (s *CouncilSystem) TallyVotes() (engine.Entity, bool) {
 	var maxEntity engine.Entity
 	maxCount := 0
 	for entity, count := range counts {
-		if count > maxCount {
+		if count > maxCount || (count == maxCount && entity < maxEntity) {
 			maxCount = count
 			maxEntity = entity
 		}

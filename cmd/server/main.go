@@ -9,20 +9,14 @@ import (
 	"syscall"
 
 	"github.com/opd-ai/where/config"
-	"github.com/opd-ai/where/pkg/engine"
 	"github.com/opd-ai/where/pkg/network"
 )
 
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
-		log.Printf("config: %v, using defaults", err)
-		cfg = &config.Config{
-			Server: config.ServerConfig{Address: "localhost", Port: 7777, TickRate: 60},
-		}
+		log.Fatalf("failed to load config: %v", err)
 	}
-
-	_ = engine.NewWorld()
 
 	srv := network.NewServer(cfg.Server.Address, cfg.Server.Port, cfg.Server.TickRate)
 	if err := srv.Start(); err != nil {
