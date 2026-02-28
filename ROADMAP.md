@@ -130,7 +130,7 @@
 | Server tick budget | <16ms for 12 players | `go test -bench=BenchmarkServerTick` |
 | Latency tolerance | Playable at 5000ms RTT | Integration test with simulated latency shaper |
 | Genre distinctiveness | <20% shared recipe IDs across genres | Unit test asserting recipe-set intersection |
-| Zero asset files | No binary/image/audio files in repo | CI: `find . -name '*.png' -o -name '*.mp3' -o -name '*.wav'` returns empty |
+| Zero asset files | No binary/image/audio files in repo | CI: (1) `find . -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.gif' -o -name '*.webp' -o -name '*.bmp' -o -name '*.svg' -o -name '*.mp3' -o -name '*.wav' -o -name '*.ogg' -o -name '*.flac' -o -name '*.aac' -o -name '*.m4a' -o -name '*.mp4' -o -name '*.mov' \)` returns empty; (2) `git ls-files -z | xargs -0 file --mime` shows no non-text MIME types outside generated/build dirs |
 | Single-binary build | Runs on clean VM | CI artifact test on fresh Docker image |
 | Elimination protocol | Vote processed <500ms on LAN | Integration test: 6-bot council vote |
 
