@@ -27,12 +27,15 @@ type Game struct {
 func (g *Game) Update() error {
 	// Toggle perspective with 'P' key
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
-		if g.cfg.Window.Perspective == rendering.PerspectiveFirstPerson {
-			g.cfg.Window.Perspective = rendering.PerspectiveOverTheShoulder
+		currentPerspective := g.renderer.GetPerspective()
+		var newPerspective string
+		if currentPerspective == config.PerspectiveFirstPerson {
+			newPerspective = config.PerspectiveOverTheShoulder
 		} else {
-			g.cfg.Window.Perspective = rendering.PerspectiveFirstPerson
+			newPerspective = config.PerspectiveFirstPerson
 		}
-		g.renderer.SetPerspective(g.cfg.Window.Perspective)
+		g.renderer.SetPerspective(newPerspective)
+		g.cfg.Window.Perspective = newPerspective
 	}
 	return nil
 }
@@ -41,7 +44,7 @@ func (g *Game) Update() error {
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{R: 34, G: 34, B: 34, A: 255})
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("Where — %s [seed %d]\nPerspective: %s (Press 'P' to toggle)",
-		g.cfg.Game.Genre, g.cfg.Game.Seed, g.cfg.Window.Perspective))
+		g.cfg.Game.Genre, g.cfg.Game.Seed, g.renderer.GetPerspective()))
 }
 
 // Layout returns the logical screen dimensions.

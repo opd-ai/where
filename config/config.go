@@ -78,6 +78,11 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("unmarshaling config: %w", err)
 	}
 
+	// Validate and normalize perspective value
+	if cfg.Window.Perspective != PerspectiveFirstPerson && cfg.Window.Perspective != PerspectiveOverTheShoulder {
+		cfg.Window.Perspective = PerspectiveFirstPerson
+	}
+
 	return &cfg, nil
 }
 
