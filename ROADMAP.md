@@ -96,13 +96,13 @@
 
 **Prediction & reconciliation:** Client predicts movement locally; server reconciles every authoritative tick. On divergence, client snaps to server position and replays buffered inputs (V-Series pattern extended for 2D wilderness).
 
-**Lag compensation:** Server maintains 1-second input history. Melee/ranged actions rewound to sender's local time for hit detection.
+**Lag compensation:** Server maintains at least a 6-second input history (max supported RTT + jitter). Melee/ranged actions are rewound to the sender's local time for hit detection, but only within this history window; older inputs are treated as misses.
 
 **Elimination protocol:** On council vote finalization, server broadcasts `EliminationEvent{PlayerID, Reason, SurvivalScore}`. Eliminated player's authority stripped; client transitions to spectator stream. Match ends when one player or one alliance reaches configurable win threshold.
 
 **Spectator feed:** Separate lower-bandwidth stream (position + animation only, no inventory). Spectators receive `AudienceVoteWindow` events to cast influence votes.
 
-**Tor/onion tolerance:** All protocol timers and vote windows parameterized for 200–5000ms RTT. No real-time-critical gating; council votes use a configurable 30-second window.
+**Tor/onion tolerance:** All protocol timers and vote windows are parameterized for 200–5000ms RTT, focusing on non-real-time flows (e.g., council votes with a configurable 30-second window).
 
 ---
 
