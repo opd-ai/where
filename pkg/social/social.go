@@ -37,7 +37,11 @@ func (s *CouncilSystem) CastVote(voter, target engine.Entity) {
 }
 
 // TallyVotes counts votes and returns the entity with the most votes.
-func (s *CouncilSystem) TallyVotes() engine.Entity {
+// Returns (0, false) when there are no votes.
+func (s *CouncilSystem) TallyVotes() (engine.Entity, bool) {
+	if len(s.Votes) == 0 {
+		return 0, false
+	}
 	counts := make(map[engine.Entity]int)
 	for _, v := range s.Votes {
 		counts[v.Target]++
@@ -50,5 +54,5 @@ func (s *CouncilSystem) TallyVotes() engine.Entity {
 			maxEntity = entity
 		}
 	}
-	return maxEntity
+	return maxEntity, true
 }
