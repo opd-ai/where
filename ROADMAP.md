@@ -31,7 +31,7 @@
 3. Implement `WeatherGenerator`: Markov-chain day/night + weather state machine (clear/rain/storm/fog/snow).
    - **AC:** 24-hour simulated cycle completes without state deadlock; all five weather states reachable.
 4. Implement genre-keyed visual palettes and terrain tile synthesizer; all five `GenreID` values produce visually distinct output.
-   - **AC:** Screenshot diff tool confirms ≥40% pixel divergence between any two genre renders of the same seed.
+   - **AC:** For a fixed seed, per-genre palette/LUT parameter vectors and a CPU-side offscreen render checksum (under a fixed software renderer) are computed in tests; hashes/checksums differ between any two genres and a deterministic image metric confirms ≥40% divergence.
 5. Implement `EcosystemGenerator`: predator/prey population tables, food-chain rules, per-biome spawn rates.
    - **AC:** Ecosystem reaches stable equilibrium within 100 simulated in-game days; no species drives another to zero within 30 days.
 
