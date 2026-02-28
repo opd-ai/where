@@ -12,6 +12,7 @@ window:
   height: 720
   fullscreen: false
   vsync: true
+  perspective: "first-person"
 
 server:
   address: "localhost"

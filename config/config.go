@@ -26,11 +26,12 @@ type GameConfig struct {
 
 // WindowConfig holds window/display settings.
 type WindowConfig struct {
-	Title      string `mapstructure:"title"`
-	Width      int    `mapstructure:"width"`
-	Height     int    `mapstructure:"height"`
-	Fullscreen bool   `mapstructure:"fullscreen"`
-	VSync      bool   `mapstructure:"vsync"`
+	Title       string `mapstructure:"title"`
+	Width       int    `mapstructure:"width"`
+	Height      int    `mapstructure:"height"`
+	Fullscreen  bool   `mapstructure:"fullscreen"`
+	VSync       bool   `mapstructure:"vsync"`
+	Perspective string `mapstructure:"perspective"`
 }
 
 // ServerConfig holds server settings.
@@ -85,6 +86,7 @@ func setDefaults() {
 	viper.SetDefault("window.height", 720)
 	viper.SetDefault("window.fullscreen", false)
 	viper.SetDefault("window.vsync", true)
+	viper.SetDefault("window.perspective", "first-person")
 
 	viper.SetDefault("server.address", "localhost")
 	viper.SetDefault("server.port", 7777)

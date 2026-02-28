@@ -11,11 +11,11 @@ import (
 type BiomeType string
 
 const (
-	BiomeForest    BiomeType = "forest"
-	BiomeDesert    BiomeType = "desert"
-	BiomeTundra    BiomeType = "tundra"
-	BiomeSwamp     BiomeType = "swamp"
-	BiomeMountain  BiomeType = "mountain"
+	BiomeForest   BiomeType = "forest"
+	BiomeDesert   BiomeType = "desert"
+	BiomeTundra   BiomeType = "tundra"
+	BiomeSwamp    BiomeType = "swamp"
+	BiomeMountain BiomeType = "mountain"
 )
 
 // Tile represents a single map tile.

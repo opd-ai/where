@@ -21,19 +21,27 @@ func NewTileSynthesizer(palette *Palette) *TileSynthesizer {
 
 // Renderer manages the rendering pipeline.
 type Renderer struct {
-	Width  int
-	Height int
+	Width       int
+	Height      int
+	Perspective string // "first-person" or "over-the-shoulder"
 }
 
 // NewRenderer creates and returns a new Renderer.
 func NewRenderer(width, height int) *Renderer {
 	return &Renderer{
-		Width:  width,
-		Height: height,
+		Width:       width,
+		Height:      height,
+		Perspective: "first-person",
 	}
+}
+
+// SetPerspective sets the camera perspective.
+func (r *Renderer) SetPerspective(perspective string) {
+	r.Perspective = perspective
 }
 
 // Draw performs a render pass.
 func (r *Renderer) Draw() {
 	// Skeleton: rendering draw logic
+	// Rendering will differ based on r.Perspective
 }

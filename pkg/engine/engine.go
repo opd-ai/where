@@ -6,12 +6,13 @@ type Entity uint64
 
 // World is the ECS registry that manages entities and components.
 type World struct {
-	nextID     Entity
-	Positions  map[Entity]*Position
-	Hungers    map[Entity]*Hunger
+	nextID      Entity
+	Positions   map[Entity]*Position
+	Hungers     map[Entity]*Hunger
 	Inventories map[Entity]*Inventory
-	Shelters   map[Entity]*Shelter
-	Statuses   map[Entity]*StatusEffects
+	Shelters    map[Entity]*Shelter
+	Statuses    map[Entity]*StatusEffects
+	Cameras     map[Entity]*Camera
 }
 
 // Position represents an entity's location in the world.
@@ -27,7 +28,7 @@ type Hunger struct {
 
 // Inventory holds items for an entity.
 type Inventory struct {
-	Items []string
+	Items    []string
 	Capacity int
 }
 
@@ -43,15 +44,23 @@ type StatusEffects struct {
 	Effects map[string]float64
 }
 
+// Camera represents the camera perspective for an entity.
+type Camera struct {
+	Perspective string  // "first-person" or "over-the-shoulder"
+	Distance    float64 // Distance from entity (used for over-the-shoulder)
+	Angle       float64 // Camera angle in radians
+}
+
 // NewWorld creates and returns a new ECS World.
 func NewWorld() *World {
 	return &World{
-		nextID:     1,
-		Positions:  make(map[Entity]*Position),
-		Hungers:    make(map[Entity]*Hunger),
+		nextID:      1,
+		Positions:   make(map[Entity]*Position),
+		Hungers:     make(map[Entity]*Hunger),
 		Inventories: make(map[Entity]*Inventory),
-		Shelters:   make(map[Entity]*Shelter),
-		Statuses:   make(map[Entity]*StatusEffects),
+		Shelters:    make(map[Entity]*Shelter),
+		Statuses:    make(map[Entity]*StatusEffects),
+		Cameras:     make(map[Entity]*Camera),
 	}
 }
 

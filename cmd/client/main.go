@@ -9,26 +9,39 @@ import (
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 
 	"github.com/opd-ai/where/config"
 	"github.com/opd-ai/where/pkg/engine"
+	"github.com/opd-ai/where/pkg/rendering"
 )
 
 // Game implements the ebiten.Game interface.
 type Game struct {
-	cfg   *config.Config
-	world *engine.World
+	cfg      *config.Config
+	world    *engine.World
+	renderer *rendering.Renderer
 }
 
 // Update advances the game state by one tick.
 func (g *Game) Update() error {
+	// Toggle perspective with 'P' key
+	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
+		if g.cfg.Window.Perspective == "first-person" {
+			g.cfg.Window.Perspective = "over-the-shoulder"
+		} else {
+			g.cfg.Window.Perspective = "first-person"
+		}
+		g.renderer.SetPerspective(g.cfg.Window.Perspective)
+	}
 	return nil
 }
 
 // Draw renders the current game state.
 func (g *Game) Draw(screen *ebiten.Image) {
 	screen.Fill(color.RGBA{R: 34, G: 34, B: 34, A: 255})
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("Where — %s [seed %d]", g.cfg.Game.Genre, g.cfg.Game.Seed))
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("Where — %s [seed %d]\nPerspective: %s (Press 'P' to toggle)",
+		g.cfg.Game.Genre, g.cfg.Game.Seed, g.cfg.Window.Perspective))
 }
 
 // Layout returns the logical screen dimensions.
@@ -43,10 +56,13 @@ func main() {
 	}
 
 	world := engine.NewWorld()
+	renderer := rendering.NewRenderer(cfg.Window.Width, cfg.Window.Height)
+	renderer.SetPerspective(cfg.Window.Perspective)
 
 	game := &Game{
-		cfg:   cfg,
-		world: world,
+		cfg:      cfg,
+		world:    world,
+		renderer: renderer,
 	}
 
 	ebiten.SetWindowSize(cfg.Window.Width, cfg.Window.Height)

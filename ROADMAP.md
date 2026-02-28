@@ -8,12 +8,12 @@
 
 ## 2. Core Architecture
 
-**ECS:** Entities are `uint64` IDs. Components are plain structs (`Position`, `Hunger`, `Inventory`, `Shelter`, `StatusEffects`). Systems own all logic and iterate component sets each tick.
+**ECS:** Entities are `uint64` IDs. Components are plain structs (`Position`, `Hunger`, `Inventory`, `Shelter`, `StatusEffects`, `Camera`). Systems own all logic and iterate component sets each tick. The `Camera` component supports switchable perspectives ("first-person" or "over-the-shoulder") for gameplay visual rendering.
 
 **V-Series reuse:**
 - `pkg/procgen` — `Generator` interface (`Generate(seed int64, params GenerationParams) (interface{}, error)` + `Validate()`); extend with biome, flora, fauna, weather generators.
 - `pkg/audio` — oscillator/envelope pipeline; add biome ambience, weather layers, animal-call synthesis.
-- `pkg/rendering` — runtime sprite/tile/particle pipeline; add terrain tile blending, post-processing palettes per genre.
+- `pkg/rendering` — runtime sprite/tile/particle pipeline; add terrain tile blending, post-processing palettes per genre, and support for switchable camera perspectives (first-person and over-the-shoulder).
 - `pkg/network` — TCP authoritative server, client-side prediction, delta compression; extend for open-world chunk sync and elimination protocol.
 - `pkg/engine` — game loop, ECS registry, input; reuse unchanged.
 
