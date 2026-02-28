@@ -47,7 +47,7 @@
 
 ### Phase 3 — Multiplayer Core (5 weeks)
 10. Authoritative server: chunk-based world-state delta compression; inventory/crafting authority on server.
-    - **AC:** Two clients on 200ms simulated latency maintain <50ms positional divergence.
+    - **AC:** With 200ms simulated round-trip latency, the mean positional error between client-predicted and server-authoritative player positions over a 60-second run (sampled at 60Hz) is <0.5 tiles and the maximum error is <1.5 tiles.
 11. Client-side prediction + server reconciliation for player movement and action inputs.
     - **AC:** On 5000ms simulated latency, client remains playable (no freeze); reconciliation corrects position within 3 ticks of packet receipt.
 12. Spectator mode: eliminated players receive a read-only stream of world state.
