@@ -28,14 +28,11 @@ func (g *Game) Update() error {
 	// Toggle perspective with 'P' key
 	if inpututil.IsKeyJustPressed(ebiten.KeyP) {
 		currentPerspective := g.renderer.GetPerspective()
-		var newPerspective string
 		if currentPerspective == config.PerspectiveFirstPerson {
-			newPerspective = config.PerspectiveOverTheShoulder
+			g.renderer.SetPerspective(config.PerspectiveOverTheShoulder)
 		} else {
-			newPerspective = config.PerspectiveFirstPerson
+			g.renderer.SetPerspective(config.PerspectiveFirstPerson)
 		}
-		g.renderer.SetPerspective(newPerspective)
-		g.cfg.Window.Perspective = newPerspective
 	}
 	return nil
 }
