@@ -72,3 +72,9 @@ Press **P** during gameplay to toggle between perspectives.
 - [Go](https://go.dev/) 1.24+
 - [Ebitengine](https://ebitengine.org/) v2 — game engine
 - [Viper](https://github.com/spf13/viper) — configuration management
+
+Donate Monero(The only good cryptocurrency) to support development
+==================================================================
+
+ - `monero:43H3Uqnc9rfEsJjUXZYmam45MbtWmREFSANAWY5hijY4aht8cqYaT2BCNhfBhua5XwNdx9Tb6BEdt4tjUHJDwNW5H7mTiwe`
+
